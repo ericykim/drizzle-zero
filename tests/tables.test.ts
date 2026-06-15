@@ -605,14 +605,14 @@ describe('tables', () => {
     const expected = table('events')
       .columns({
         id: string(),
-        createdAt: number().optional(),
+        createdAt: number(),
         updatedAt: number().optional(),
         scheduledFor: number(),
         scheduledForTz: number().optional(),
         precision: number().optional(),
         timestampModeString: number().optional(),
         timestampModeDate: number().optional(),
-        timestampDefault: number().from('timestamp_default').optional(),
+        timestampDefault: number().from('timestamp_default'),
       })
       .primaryKey('id');
 
@@ -749,7 +749,7 @@ describe('tables', () => {
       .columns({
         id: string(),
         startsAt: number().from('starts_at'),
-        startsAtTz: number().from('starts_at_tz').optional(),
+        startsAtTz: number().from('starts_at_tz'),
         endsAt: number().from('ends_at').optional(),
       })
       .primaryKey('id');
@@ -839,7 +839,7 @@ describe('tables', () => {
       .columns({
         id: string(),
         role: enumeration<'admin' | 'user' | 'guest'>(),
-        roleWithDefault: enumeration<'admin' | 'user' | 'guest'>().optional(),
+        roleWithDefault: enumeration<'admin' | 'user' | 'guest'>(),
         backupRole: enumeration<'admin' | 'user' | 'guest'>().optional(),
       })
       .primaryKey('id');
@@ -1360,11 +1360,11 @@ describe('tables', () => {
     const expected = table('items')
       .columns({
         id: string(),
-        name: string().optional(),
-        isActive: boolean().optional(),
-        score: number().optional(),
+        name: string(),
+        isActive: boolean(),
+        score: number(),
         optionalScore: number().optional(),
-        currentDateWithRuntimeDefault: string().optional(),
+        currentDateWithRuntimeDefault: string(),
         optionalCurrentDateWithRuntimeDefault: string().optional(),
       })
       .primaryKey('id');

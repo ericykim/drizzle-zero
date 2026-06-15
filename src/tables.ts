@@ -356,12 +356,19 @@ const createZeroTableBuilder = <
         }
       }
 
+      const isImplicitSerial = [
+        'PgSerial',
+        'PgSmallSerial',
+        'PgBigSerial53',
+        'PgBigSerial64',
+      ].includes(column.columnType);
+
       const isColumnOptional =
         typeof columnConfig === 'boolean' || typeof columnConfig === 'undefined'
           ? isPrimaryKey
             ? false // Primary keys are NEVER optional, even with defaults
             : hasServerDefault
-              ? true
+              ? isImplicitSerial || !column.notNull
               : !column.notNull
           : isColumnConfigOverride
             ? columnConfig.schema.optional
